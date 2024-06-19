@@ -2,12 +2,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Grid, GridItem } from "@material-ui/core";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function Header({ title }) {
-  return <h1>{title ? title : "Default title"}</h1>;
-}
+// Layouts and pages.
+import RootLayout from "./layouts/RootLayout";
+import Dashboard from "./pages/Dashboard";
+import Create from "./pages/Create";
 
-export default function Home() {
+function App() {
   const names = ["Ng Heng Khai", "Tay Yong Long", "Izzat Fadzlon"];
 
   const [likes, setLikes] = useState(0);
@@ -17,14 +19,15 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Header title="The Review Room" />
-      <ul>
-        {names.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
-      <button onClick={handleClick}>Like ({likes})</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="create" element={<Create />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;
