@@ -24,7 +24,6 @@ export default function Home() {
           <li key={name}>{name}</li>
         ))}
       </ul>
-
       <button onClick={handleClick}>Like ({likes})</button>
     </div>
   );
